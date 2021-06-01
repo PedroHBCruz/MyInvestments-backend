@@ -3,6 +3,7 @@ package br.com.wolfpack.myInvestments.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import br.com.wolfpack.myInvestments.repositories.InvestimentoRepository;
 
 @RestController
 @RequestMapping("/investimentos")
+@CrossOrigin(origins = "http://localhost:3000")
 public class InvestimentoResource {
 
 	@Autowired
@@ -31,9 +33,9 @@ public class InvestimentoResource {
 		return investimentoRepository.findById(codigo).orElse(null);
 	}
 
-	@DeleteMapping
-	public void remove(@PathVariable Long Codigo) {
-		investimentoRepository.deleteById(Codigo);
+	@DeleteMapping("/{codigo}")
+	public void remove(@PathVariable Long codigo) {
+		investimentoRepository.deleteById(codigo);
 	}
 
 	@PostMapping
